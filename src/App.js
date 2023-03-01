@@ -7,8 +7,20 @@ function App() {
   async function testGetContacts(){
     console.log('Starting...');
 
-    const response = await axios.get('https://fctgcorporate--dataart2.sandbox.lightning.force.com/services/data/v57.0/sobjects/Account/0013M00001HsuUKQAZ');
-    console.log('response  ', response);
+    let url = 'https://fctgcorporate--dataart2.sandbox.lightning.force.com/services/data/v57.0/sobjects/Account/0013M00001HsuUKQAZ';
+    
+    axios(url, {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+      credentials: false,
+    }).then(response => {
+      console.log('response', response);
+    })
   }
 
   return (
