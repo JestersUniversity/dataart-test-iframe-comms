@@ -14,12 +14,9 @@ function App() {
     
     axios(baseUrl+url, {
       method: 'GET',
-      mode: 'cors',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
+      mode: 'no-cors',
+      headers: {},
+      withCredentials: false,
       crossdomain: true,
     }).then(response => {
       console.log('response', response);
