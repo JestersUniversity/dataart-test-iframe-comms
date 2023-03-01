@@ -2,21 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  function testGetContacts(){
+    alert('Testing');
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Testing Page
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={testGetContacts}>Click To Get Contacts</button>
       </header>
     </div>
   );
