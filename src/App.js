@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 
 import logo from './logo.svg';
@@ -13,10 +13,11 @@ class App extends React.Component {
     this.state = {
       data: null
     };
+  }
 
-    window.addEventListener("message", function(event) {
-      console.log('Origin '+ event.origin);
-      console.log('data '+ event.data);
+  componentDidMount() {
+    window.addEventListener("message", (e) => {
+      console.log(e.data);
     });
   }
   
