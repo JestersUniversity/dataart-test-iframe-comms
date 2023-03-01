@@ -1,14 +1,30 @@
+import React from "react";
+import ReactDOM from "react-dom";
+
 import logo from './logo.svg';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import './App.css';
 
-function App() {
-  async function testGetContacts(){
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null
+    };
+
+    window.addEventListener("message", function(event) {
+      console.log('Origin '+ event.origin);
+      console.log('data '+ event.data);
+    });
+  }
+  
+  async testGetContacts(){
     console.log('Starting...');
 
-    let baseUrl = 'https://fctgcorporate--dataart2.sandbox.lightning.force.com';
-    let url = '/services/data/v20.0/sobjects/Account';
+    let baseUrl = 'https://fctgcorporate--dataart2.sandbox.my.salesforce-sites.com/publicinteraction';
+    let url = '/services/apexrest/publicrest?id=0013M00001HsuUKQAZ';
 
     const cors = require('cors')
     
@@ -20,16 +36,24 @@ function App() {
       crossdomain: true,
     }).then(response => {
       console.log('response', response);
+      this.setState({
+        data: JSON.stringify(response)
+      });
     })
   }
 
-  return (
-    <div className="App">
+  render() {
+    return (<div className="App">
       <header className="App-header">
-        <Button onClick={testGetContacts}>Click To Get Contacts</Button>
+        {
+          !this.state.data && <Button onClick={this.testGetContacts.bind(this)}>Click To Get Account Details</Button>
+        }
+        {
+          this.state.data && <textarea value={this.state.data} rows="4" cols="50" />
+        }
       </header>
-    </div>
-  );
+    </div>)
+  };
 }
 
 export default App;
